@@ -1,5 +1,5 @@
 <?php
-    require_once 'controller/post.php';
+    require_once 'Controller/post.php';
 
     $controller = new PostController($pdo);
     $controller->index();

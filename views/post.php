@@ -35,7 +35,7 @@
                 ?>
                     <div class="col-3">
                         <div class="card" style="width: 18rem;">
-                            <img src="img/0auto.jpeg" class="card-img-top" alt="Placeholder Image">
+                            <img src="img/0auto.jpeg" class="card-img-top " alt="Placeholder Image">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo htmlspecialchars($post['title']); ?></h5>
                                 <p class="card-text"><?php echo $shortContent; ?></p>
@@ -50,15 +50,31 @@
             <div class="row mt-5">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link">Previous</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
+                        <?php if ($page > 1): ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?php echo $page - 1; ?>">Previous</a>
+                            </li>
+                        <?php else: ?>
+                            <li class="page-item disabled">
+                                <a class="page-link">Previous</a>
+                            </li>
+                        <?php endif; ?>
+
+                        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                            <li class="page-item <?php echo $i === $page ? 'active' : ''; ?>">
+                                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                            </li>
+                        <?php endfor; ?>
+
+                        <?php if ($page < $totalPages): ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?php echo $page + 1; ?>">Next</a>
+                            </li>
+                        <?php else: ?>
+                            <li class="page-item disabled">
+                                <a class="page-link">Next</a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </nav>
             </div>
@@ -77,7 +93,7 @@
                     <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
                     <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
                 </ul>
-            </ footer>
+            </footer>
         </div>
         </div>
 

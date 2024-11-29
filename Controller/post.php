@@ -10,7 +10,14 @@
         }
 
         public function index() {
-            $posts = $this->postModel->getPosts(20);
+            $limit = 10; // Nombre de posts par page
+            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+            $offset = ($page - 1) * $limit;
+
+            $posts = $this->postModel->getPosts($limit, $offset);
+            $totalPosts = $this->postModel->getTotalPosts(); 
+            $totalPages = ceil($totalPosts / $limit);
+
             include 'views/post.php';
         }
     }
